@@ -97,7 +97,7 @@ function convertFontURL() {
         document.getElementById("result").innerHTML = updatedURL;
 
         // Display the resulting code
-        document.getElementById("result-code").innerHTML = '&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;<br>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;<br>&lt;link href="' + updatedURL2 + '" rel="stylesheet"&gt;';
+        document.getElementById("result-code").innerHTML = '&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;<br>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;<br>&lt;link href="' + updatedURL + '" rel="stylesheet"&gt;';
 
     } else {
         // Display the result
