@@ -8,51 +8,88 @@
     <script src="scripts.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <header>
+        <h1>Convert Google Fonts URL to use Variable Font Files</h1>
+    </header>
     
     <main>
-        <h1>Convert Google Fonts URL to use Variable Font Files</h1>
 
-        <p>Convert your Google Fonts URL to use the variable font files instead. This will only work if the Google Font has variable fonts.</p>
+        <p>Convert your Google Fonts URL to use the variable font files instead.</p>
 
         <p>You can read more about variable fonts on <a href="https://web.dev/articles/variable-fonts">web.dev</a> or <a href="https://fonts.google.com/knowledge/using_variable_fonts_on_the_web">Google Fonts</a>.</p>
         
-        <p>Note: This currently only supports font weights and styles (normal and italic). Features like <a href="https://fonts.google.com/knowledge/glossary/optical_size_axis" target="_blank" rel="noopener">Optical Size</a> are not currently supported. Feel free to <a href="https://github.com/jtleathers/google-fonts-converter" target="_blank" rel="noopener">contribute</a> to make that change though!</p>
+        <p class="italic">Notes: Make sure you only use Google Fonts that are classified as <strong>variable</strong> fonts. This converter only supports font weights and styles (normal and italic) so features like <a href="https://fonts.google.com/knowledge/glossary/optical_size_axis" target="_blank" rel="noopener">optical size</a> are not currently supported. Feel free to <a href="https://github.com/jtleathers/google-fonts-converter" target="_blank" rel="noopener">contribute</a> to make that change though!</p>
         
         <form id="urlForm">
             <label for="urlInput">Enter Google Fonts URL:</label>
-            <br><input type="text" id="urlInput" required>
-            <button type="button" onclick="convertFontURL()">Convert</button>
+            <input type="text" id="urlInput" required onkeydown="handleKeyPress(event)" placeholder="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+            <button type="button" onclick="convertFontURL()">Convert URL</button>
         </form>
 
         <section>
             <h2>Updated URL</h2>
-            <p id="result">Nothing yet...</p>
+            <p id="result-url">Your updated URL will appear here.</p>
+            <div id="result-url-copy">
+                <button onclick="copyCodeToClipboard( 'result-url' )">Copy URL</button>
+                <span>Copied!</span>
+            </div>
             
             <h2>Updated Link Tags</h2>
-            <code id="result-code">Nothing yet...</code>
+            <code id="result-code">Your updated code will appear here.</code>
+            <div id="result-code-copy">
+                <button onclick="copyCodeToClipboard( 'result-code' )">Copy Code</button>
+                <span>Copied!</span>
+            </div>
         </section>
         
-        <section>
+        <section class="examples">
             <h2>Examples</h2>
+            <p>Below are examples of the original URL provided by Google and how the converter will change it to serve variable fonts instead.</p>
             
-            <h3>Multiple Font Familes with Italic and Normal</h3>
-            <p>Original URL:<br>https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,800;1,300;1,400;1,500;1,800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap</p>
-            <p>Updated URL:<br>https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap</p>
-            
-            <h3>Multiple Font Familes with only Normal</h3>
-            <p>Original URL:<br>https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;500;700&display=swap</p>
-            <p>Updated URL:<br>https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..700&family=Playfair+Display:wght@400..700&display=swap</p>
-            
-            <h3>One Font Family with Italic and Normal</h3>
-            <p>Original URL:<br>https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,800;1,300;1,400;1,500;1,800&display=swap</p>
-            <p>Updated URL:<br>https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap</p>
-            
-            <h3>One Font Family with only Normal</h3>
-            <p>Original URL:<br>https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;800&display=swap</p>
-            <p>Updated URL:<br>https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap</p>
+            <section>
+                <h3>Multiple Font Familes with Italic and Normal</h3>
+
+                <h4>Original URL</h4>
+                <p>https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,800;1,300;1,400;1,500;1,800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap</p>
+
+                <h4>Updated URL</h4>
+                <p>https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap</p>
+            </section>
+
+            <section>
+                <h3>Multiple Font Familes with only Normal</h3>
+
+                <h4>Original URL</h4>
+                <p>https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;500;700&display=swap</p>
+
+                <h4>Updated URL</h4>
+                <p>https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..700&family=Playfair+Display:wght@400..700&display=swap</p>
+            </section>
+
+            <section>
+                <h3>One Font Family with Italic and Normal</h3>
+
+                <h4>Original URL</h4>
+                <p>https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,800;1,300;1,400;1,500;1,800&display=swap</p>
+
+                <h4>Updated URL</h4>
+                <p>https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap</p>
+            </section>
+
+            <section>
+                <h3>One Font Family with only Normal</h3>
+
+                <h4>Original URL</h4>
+                <p>https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;800&display=swap</p>
+
+                <h4>Updated URL</h4>
+                <p>https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap</p>
+            </section>
+
         </section>
         
     </main>

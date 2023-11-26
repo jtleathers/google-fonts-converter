@@ -1,3 +1,38 @@
+function handleKeyPress(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Prevent form submission
+        convertFontURL(); // Manually trigger the conversion function
+    }
+}
+
+function copyCodeToClipboard(elementID) {
+    // Get the code content and replace <br>, &gt;, and &lt; with newlines, >, and <
+    var codeToCopy = document.getElementById(elementID).innerHTML
+    .replace(/<br>/g, '\n')
+    .replace(/&gt;/g, '>')
+    .replace(/&lt;/g, '<');
+
+    // Create a temporary textarea element to facilitate copying
+    var tempTextarea = document.createElement('textarea');
+    tempTextarea.value = codeToCopy;
+
+    // Append the textarea to the document
+    document.body.appendChild(tempTextarea);
+
+    // Select the text in the textarea
+    tempTextarea.select();
+    tempTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the selected text to the clipboard
+    document.execCommand('copy');
+
+    // Remove the temporary textarea
+    document.body.removeChild(tempTextarea);
+
+    // Optionally, you can provide feedback to the user
+    document.getElementById(elementID+'-copy').classList.add('show');
+}
+
 function convertFontURL() {
 
     function filterAndExtractMinMax(arr, targetValue) {
@@ -94,14 +129,16 @@ function convertFontURL() {
         var updatedURL = url.replace(/family=.*?&display=swap/, newURL);                
         
         // Display the resulting url
-        document.getElementById("result").innerHTML = updatedURL;
+        document.getElementById("result-url").innerHTML = updatedURL;
 
         // Display the resulting code
         document.getElementById("result-code").innerHTML = '&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;<br>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;<br>&lt;link href="' + updatedURL + '" rel="stylesheet"&gt;';
 
     } else {
         // Display the result
-        document.getElementById("result").innerHTML = "This is not a Google Fonts URL.";
+        document.getElementById("result-url").innerHTML = "This is not a Google Fonts URL.";
+
+        document.getElementById("result-code").innerHTML = "This is not a Google Fonts URL.";
     }
 
 }
