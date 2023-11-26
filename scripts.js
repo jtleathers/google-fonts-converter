@@ -57,6 +57,9 @@ function convertFontURL() {
         return resultArray.join('..');
     }
 
+    document.getElementById('result-url-copy').classList.remove('show');
+    document.getElementById('result-code-copy').classList.remove('show');
+
     // Get the input value
     var url = document.getElementById("urlInput").value;
 
