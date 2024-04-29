@@ -1,6 +1,8 @@
 # Convert Google Fonts URL to use Variable Font Files
 This converter takes a normal Google Fonts URL and converts it into a Google Fonts URL that will return variable font files instead. See the HTML file for more information.
 
+**Note: This is not necessary anymore as Google Fonts have finally updated the interface to serve correct URLs for variable fonts.**
+
 ## Chat GPT Experiment
 This was mostly an experiment to see how well ChatGPT could do to create the JavaScript functionality of this converter. 
 
